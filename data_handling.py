@@ -1,7 +1,9 @@
 import requests
+import os
+from dotenv import load_dotenv
 
-NUTRITIONIX_APP_ID = '76e8ceb8'
-NUTRITIONIX_API_KEY = '3e632828fb8442581238313daebd2ea2'
+load_dotenv()
+
 
 def get_nutrition_info(food, quantity=1, unit=None):
     if unit:
@@ -13,8 +15,8 @@ def get_nutrition_info(food, quantity=1, unit=None):
     url = 'https://trackapi.nutritionix.com/v2/natural/nutrients'
     headers = {
         'Content-Type': 'application/json',
-        'x-app-id': NUTRITIONIX_APP_ID,
-        'x-app-key': NUTRITIONIX_API_KEY,
+        'x-app-id': os.environ.get('NUTRITIONIX_APP_ID'),
+        'x-app-key': os.environ.get('NUTRITIONIX_API_KEY'),
     }
     response = requests.post(url, json={"query":query}, headers=headers)
     return response.json()

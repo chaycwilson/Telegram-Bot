@@ -1,14 +1,13 @@
 import telebot
 from data_handling import get_nutrition_info
 from formatting import extract_food_item
+import os
 from dotenv import load_dotenv
 
-BOT_TOKEN = '7131651157:AAEQgJ25aasZm-4riO87oPRs5Q1Qh95i7Lc'
-NUTRITIONIX_APP_ID = '76e8ceb8'
-NUTRITIONIX_API_KEY = '3e632828fb8442581238313daebd2ea2'
+load_dotenv()
 
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
 print("Bot Token:", BOT_TOKEN)
-# BOT_TOKEN = os.environ.get('BOT_TOKEN')
 bot = telebot.TeleBot(BOT_TOKEN)
 
 @bot.message_handler(commands=['start','hello'])
