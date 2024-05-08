@@ -25,6 +25,6 @@ def extract_food_item(text):
     return food, quantity, unit
 
 # Example usage
-question = "How many calories are in 200 grams of steak?"
-food, quantity, unit = extract_food_item(question)
-print(f"Food: {food}, Quantity: {quantity}, Unit: {unit}")
+# question = "How many calories are in 200 grams of steak?"
+# food, quantity, unit = extract_food_item(question)
+# print(f"Food: {food}, Quantity: {quantity}, Unit: {unit}")
