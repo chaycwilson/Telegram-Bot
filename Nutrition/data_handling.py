@@ -1,7 +1,7 @@
 import requests
 import os
 from dotenv import load_dotenv
-from formatting import extract_food_item
+from Nutrition.formatting import extract_food_item
 import telebot
 
 load_dotenv()
