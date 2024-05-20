@@ -10,7 +10,7 @@ def get_metrics(height, weight):
     bmi = (weight / ((height / 100) ** 2))
     return {"bmi": bmi}
 
-def fetch_exercises_by_target(target, limit=15):
+def fetch_exercises_by_target(target, limit=5):
     url = f"{EXERCISEDB_ENDPOINT}/{target}"  
     headers = {
         "X-RapidAPI-Key": EXERCISEDB_API_KEY,
@@ -26,10 +26,10 @@ def fetch_exercises_by_target(target, limit=15):
 def format_exercise_data(exercises):
     formatted_text = ""
     for exercise in exercises:
-        formatted_text += f"• **Name**: {exercise['name']}\n  - **Equipment**: {exercise['equipment']}\n  - **Target**: {exercise['target']}\n\n"
+        formatted_text += f"• **Name**: {exercise['name']}\n  - **Equipment**: {exercise['equipment']}\n  - **Target**: {exercise['target']}\n - {exercise['gifUrl']}\n\n"
     return formatted_text
 
 # Example usage
-# exercises_for_abs = fetch_exercises_by_target('quads')
+exercises_for_abs = fetch_exercises_by_target('quads')
 # formatted_exercises = format_exercise_data(exercises_for_abs)
-# print(formatted_exercises)
+print(exercises_for_abs)

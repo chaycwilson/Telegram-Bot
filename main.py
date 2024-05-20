@@ -30,6 +30,7 @@ def start_fitness(message):
     msg = bot.send_message(message.chat.id, "Welcome! What's your height in cm?")
     bot.register_next_step_handler(msg, process_height_step)
 
+#Go through all the functions to fulfill the metrics parameters
 def process_height_step(message):
     try:
         height = int(message.text)
@@ -55,9 +56,19 @@ def process_body_part_step(message):
     user_data['body_part'] = body_part
     metrics = get_metrics(user_data['height'], user_data['weight'])
     exercises = fetch_exercises_by_target(body_part)
-    exercise_text = format_exercise_data(exercises) if exercises else "No exercises found."
-    response = f"Your BMI is {metrics['bmi']:.2f}.\n\nHere are some exercises you can do to target your {user_data['body_part']}:\n{exercise_text}"
-    bot.send_message(message.chat.id, response, parse_mode="Markdown")
+    
+    bmi_response = f"Your BMI is {metrics['bmi']:.2f}.\n\nHere are some exercises you can do to target your {body_part}:"
+    bot.send_message(message.chat.id, bmi_response, parse_mode="Markdown")
+    #If there are exercises loop through them and format it as such
+    if exercises:
+        for exercise in exercises:
+            exercise_detail = f"• **Name**: {exercise['name']} \n  - **Equipment**: {exercise['equipment']} \n  - **Target**: {exercise['target']}"
+            bot.send_animation(message.chat.id, exercise['gifUrl'], caption=exercise_detail, parse_mode="Markdown")
+    else:
+        no_exercises_response = "No exercises found for the selected body part."
+        bot.send_message(message.chat.id, no_exercises_response, parse_mode="Markdown")
+
+
 
 @bot.message_handler(commands=["calories"])
 def request_calories(message):
