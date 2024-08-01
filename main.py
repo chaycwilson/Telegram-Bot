@@ -3,7 +3,7 @@ from Nutrition.data_handling import handle_calories
 from Fitness.fitness import fetch_exercises_by_target, format_exercise_data, get_metrics
 import os
 from dotenv import load_dotenv
-
+#hide API key
 load_dotenv()
 user_data = {}
 
